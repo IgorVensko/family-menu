@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Семейное меню</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <h1>Семейное меню</h1>
+  <div id="weekLabel" class="week-label"></div>
+</header>
+
+<nav id="dayTabs" class="day-tabs"></nav>
+
+<main id="dayContent" class="day-content"></main>
+
+<div class="action-bar">
+  <button id="shoppingListBtn" class="btn btn-primary">🛒 Список покупок</button>
+  <button id="resetBtn" class="btn btn-secondary">Сбросить выбор недели</button>
+</div>
+
+<div id="shoppingOverlay" class="overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Список покупок</h2>
+      <button id="closeShoppingBtn" class="btn-close" aria-label="Закрыть">✕</button>
+    </div>
+    <div id="shoppingListBody" class="modal-body"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
