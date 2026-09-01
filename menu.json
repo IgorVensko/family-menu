@@ -1,478 +1,147 @@
 {
-  "week": "Неделя 1",
+  "week": "Неделя 2",
+  "servingsBase": "2 взрослых + 2 детей (7 и 5 лет). Камиль ест отдельно/малыми порциями — не учтён в граммовке.",
+  "notes": [
+    "Грибы исключены из всех блюд",
+    "Суп готовится один раз на 2 дня (группы lunchGroups) — выбор супа делается один раз, ест семья оба дня",
+    "Завтрак и ужин готовятся каждый день заново"
+  ],
+  "lunchGroups": [
+    {
+      "id": "soup_mon_tue",
+      "days": ["Понедельник", "Вторник"],
+      "type": "soup_2days",
+      "options": [
+        {
+          "name": "Суп с индейкой и овощами",
+          "ingredients": [
+            {"name": "Индейка филе", "amount": "650 г"},
+            {"name": "Картофель", "amount": "5 шт"},
+            {"name": "Морковь", "amount": "2 шт"},
+            {"name": "Лук", "amount": "1 шт"}
+          ],
+          "bju_per_portion": {"protein_g": 22, "fat_g": 8, "carbs_g": 20, "kcal": 240}
+        },
+        {
+          "name": "Гороховый суп с копчёностями",
+          "ingredients": [
+            {"name": "Горох колотый", "amount": "300 г"},
+            {"name": "Копчёности (грудинка/рёбра)", "amount": "400 г"},
+            {"name": "Картофель", "amount": "4 шт"},
+            {"name": "Морковь", "amount": "1 шт"}
+          ],
+          "bju_per_portion": {"protein_g": 18, "fat_g": 14, "carbs_g": 28, "kcal": 300}
+        },
+        {
+          "name": "Куриный суп с лапшой",
+          "ingredients": [
+            {"name": "Курица (бёдра/филе)", "amount": "650 г"},
+            {"name": "Лапша", "amount": "200 г"},
+            {"name": "Морковь", "amount": "2 шт"},
+            {"name": "Лук", "amount": "1 шт"}
+          ],
+          "bju_per_portion": {"protein_g": 20, "fat_g": 8, "carbs_g": 24, "kcal": 250}
+        }
+      ]
+    },
+    {
+      "id": "soup_thu_fri",
+      "days": ["Четверг", "Пятница"],
+      "type": "soup_2days",
+      "options": [
+        {
+          "name": "Куриный бульон с яйцом",
+          "ingredients": [
+            {"name": "Курица (бёдра/филе)", "amount": "600 г"},
+            {"name": "Яйца", "amount": "4 шт"},
+            {"name": "Морковь", "amount": "1 шт"},
+            {"name": "Зелень", "amount": "по вкусу"}
+          ],
+          "bju_per_portion": {"protein_g": 20, "fat_g": 10, "carbs_g": 8, "kcal": 210}
+        },
+        {
+          "name": "Суп с фрикадельками",
+          "ingredients": [
+            {"name": "Фарш (говядина/свинина)", "amount": "600 г"},
+            {"name": "Картофель", "amount": "5 шт"},
+            {"name": "Морковь", "amount": "1 шт"},
+            {"name": "Вермишель", "amount": "120 г"}
+          ],
+          "bju_per_portion": {"protein_g": 20, "fat_g": 14, "carbs_g": 22, "kcal": 270}
+        },
+        {
+          "name": "Овощной суп с курицей",
+          "ingredients": [
+            {"name": "Курица (бёдра/филе)", "amount": "600 г"},
+            {"name": "Картофель", "amount": "4 шт"},
+            {"name": "Кабачок", "amount": "1 шт"},
+            {"name": "Морковь", "amount": "1 шт"}
+          ],
+          "bju_per_portion": {"protein_g": 18, "fat_g": 8, "carbs_g": 18, "kcal": 200}
+        }
+      ]
+    }
+  ],
   "days": [
     {
       "day": "Понедельник",
+      "lunchGroupRef": "soup_mon_tue",
       "meals": {
         "breakfast": [
           {
-            "name": "Овсянка на молоке с бананом и корицей",
-            "ingredients": [
-              {"name": "Овсяные хлопья", "amount": "200 г"},
-              {"name": "Молоко", "amount": "600 мл"},
-              {"name": "Банан", "amount": "2 шт"},
-              {"name": "Корица", "amount": "щепотка"}
-            ],
-            "bju": {"protein_g": 14, "fat_g": 10, "carbs_g": 55, "kcal": 360}
-          },
-          {
-            "name": "Яичница с помидорами и тостом",
+            "name": "Яичница с беконом",
             "ingredients": [
               {"name": "Яйца", "amount": "5 шт"},
-              {"name": "Помидоры", "amount": "2 шт"},
-              {"name": "Хлеб", "amount": "4 ломтика"},
-              {"name": "Масло сливочное", "amount": "20 г"}
+              {"name": "Бекон", "amount": "150 г"},
+              {"name": "Хлеб", "amount": "4 ломтика"}
             ],
-            "bju": {"protein_g": 24, "fat_g": 22, "carbs_g": 28, "kcal": 400}
+            "bju": {"protein_g": 26, "fat_g": 26, "carbs_g": 25, "kcal": 420}
           },
           {
-            "name": "Творог с мёдом и ягодами",
+            "name": "Гречневая каша на молоке с изюмом",
             "ingredients": [
-              {"name": "Творог", "amount": "400 г"},
-              {"name": "Мёд", "amount": "2 ст.л."},
-              {"name": "Замороженные ягоды", "amount": "150 г"}
+              {"name": "Гречка", "amount": "200 г"},
+              {"name": "Молоко", "amount": "500 мл"},
+              {"name": "Изюм", "amount": "50 г"}
             ],
-            "bju": {"protein_g": 32, "fat_g": 12, "carbs_g": 30, "kcal": 340}
-          }
-        ],
-        "lunch": [
-          {
-            "name": "Куриный суп с лапшой",
-            "ingredients": [
-              {"name": "Куриное филе/бёдра", "amount": "400 г"},
-              {"name": "Лапша", "amount": "150 г"},
-              {"name": "Морковь", "amount": "1 шт"},
-              {"name": "Лук", "amount": "1 шт"},
-              {"name": "Хлеб", "amount": "по вкусу"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 10, "carbs_g": 40, "kcal": 380}
+            "bju": {"protein_g": 14, "fat_g": 8, "carbs_g": 55, "kcal": 350}
           },
           {
-            "name": "Гречка с тушёной курицей и морковью",
+            "name": "Творог с бананом",
             "ingredients": [
-              {"name": "Гречка", "amount": "250 г"},
-              {"name": "Куриное филе", "amount": "400 г"},
-              {"name": "Морковь", "amount": "1 шт"},
-              {"name": "Лук", "amount": "1 шт"}
+              {"name": "Творог", "amount": "350 г"},
+              {"name": "Банан", "amount": "2 шт"}
             ],
-            "bju": {"protein_g": 34, "fat_g": 12, "carbs_g": 50, "kcal": 430}
-          },
-          {
-            "name": "Овощное рагу с сосиской",
-            "ingredients": [
-              {"name": "Кабачок", "amount": "1 шт"},
-              {"name": "Картофель", "amount": "4 шт"},
-              {"name": "Морковь", "amount": "1 шт"},
-              {"name": "Сосиски", "amount": "4 шт"}
-            ],
-            "bju": {"protein_g": 18, "fat_g": 20, "carbs_g": 40, "kcal": 400}
+            "bju": {"protein_g": 28, "fat_g": 10, "carbs_g": 30, "kcal": 320}
           }
         ],
         "dinner": [
           {
-            "name": "Запечённая рыба с пюре",
+            "name": "Котлеты из индейки с гречкой",
             "ingredients": [
-              {"name": "Филе минтая/трески", "amount": "500 г"},
-              {"name": "Картофель", "amount": "800 г"},
-              {"name": "Молоко", "amount": "100 мл"},
-              {"name": "Масло сливочное", "amount": "20 г"}
-            ],
-            "bju": {"protein_g": 35, "fat_g": 12, "carbs_g": 45, "kcal": 420}
-          },
-          {
-            "name": "Макароны с фаршем и томатным соусом",
-            "ingredients": [
-              {"name": "Макароны", "amount": "300 г"},
-              {"name": "Фарш говяжий/свиной", "amount": "400 г"},
-              {"name": "Томатный соус/помидоры", "amount": "300 г"},
-              {"name": "Лук", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 32, "fat_g": 18, "carbs_g": 55, "kcal": 480}
-          },
-          {
-            "name": "Омлет с сыром и овощами",
-            "ingredients": [
-              {"name": "Яйца", "amount": "6 шт"},
-              {"name": "Сыр твёрдый", "amount": "100 г"},
-              {"name": "Молоко", "amount": "100 мл"},
-              {"name": "Овощи (огурец/помидор)", "amount": "по вкусу"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 24, "carbs_g": 10, "kcal": 370}
-          }
-        ],
-        "snack": [
-          {
-            "name": "Бутерброд с сыром + яблоко + орехи",
-            "ingredients": [
-              {"name": "Хлеб", "amount": "2 ломтика"},
-              {"name": "Сыр твёрдый", "amount": "30 г"},
-              {"name": "Яблоко", "amount": "1 шт"},
-              {"name": "Грецкие орехи", "amount": "горсть"}
-            ],
-            "bju": {"protein_g": 12, "fat_g": 14, "carbs_g": 30, "kcal": 300}
-          },
-          {
-            "name": "Бутерброд с курицей + груша",
-            "ingredients": [
-              {"name": "Хлеб", "amount": "2 ломтика"},
-              {"name": "Куриная грудка (отварная)", "amount": "40 г"},
-              {"name": "Груша", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 14, "fat_g": 6, "carbs_g": 32, "kcal": 250}
-          },
-          {
-            "name": "Хлебцы с творожным сыром + мандарин",
-            "ingredients": [
-              {"name": "Хлебцы", "amount": "3 шт"},
-              {"name": "Творожный сыр", "amount": "40 г"},
-              {"name": "Мандарин", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 8, "fat_g": 8, "carbs_g": 28, "kcal": 220}
-          }
-        ]
-      }
-    },
-    {
-      "day": "Вторник",
-      "meals": {
-        "breakfast": [
-          {
-            "name": "Блины с творогом",
-            "ingredients": [
-              {"name": "Мука", "amount": "250 г"},
-              {"name": "Молоко", "amount": "400 мл"},
-              {"name": "Яйца", "amount": "2 шт"},
-              {"name": "Творог", "amount": "200 г"}
-            ],
-            "bju": {"protein_g": 20, "fat_g": 14, "carbs_g": 60, "kcal": 440}
-          },
-          {
-            "name": "Мюсли с йогуртом и яблоком",
-            "ingredients": [
-              {"name": "Мюсли", "amount": "200 г"},
-              {"name": "Йогурт", "amount": "400 г"},
-              {"name": "Яблоко", "amount": "2 шт"}
-            ],
-            "bju": {"protein_g": 16, "fat_g": 10, "carbs_g": 50, "kcal": 350}
-          },
-          {
-            "name": "Бутерброд с яйцом и авокадо",
-            "ingredients": [
-              {"name": "Хлеб", "amount": "4 ломтика"},
-              {"name": "Яйца", "amount": "4 шт"},
-              {"name": "Авокадо", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 22, "fat_g": 24, "carbs_g": 30, "kcal": 400}
-          }
-        ],
-        "lunch": [
-          {
-            "name": "Борщ / щи",
-            "ingredients": [
-              {"name": "Говядина/свинина", "amount": "400 г"},
-              {"name": "Капуста", "amount": "300 г"},
-              {"name": "Свёкла", "amount": "2 шт"},
-              {"name": "Морковь", "amount": "1 шт"},
-              {"name": "Картофель", "amount": "3 шт"}
-            ],
-            "bju": {"protein_g": 28, "fat_g": 16, "carbs_g": 35, "kcal": 400}
-          },
-          {
-            "name": "Рис с тушёной индейкой и брокколи",
-            "ingredients": [
-              {"name": "Рис", "amount": "250 г"},
-              {"name": "Индейка филе", "amount": "400 г"},
-              {"name": "Брокколи", "amount": "300 г"}
-            ],
-            "bju": {"protein_g": 36, "fat_g": 8, "carbs_g": 55, "kcal": 420}
-          },
-          {
-            "name": "Картофельная запеканка с фаршем",
-            "ingredients": [
-              {"name": "Картофель", "amount": "800 г"},
-              {"name": "Фарш", "amount": "400 г"},
-              {"name": "Сыр твёрдый", "amount": "100 г"},
-              {"name": "Молоко", "amount": "100 мл"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 22, "carbs_g": 45, "kcal": 460}
-          }
-        ],
-        "dinner": [
-          {
-            "name": "Куриные котлеты с гречкой",
-            "ingredients": [
-              {"name": "Фарш куриный", "amount": "500 г"},
+              {"name": "Фарш индейка", "amount": "500 г"},
               {"name": "Яйцо", "amount": "1 шт"},
               {"name": "Гречка", "amount": "250 г"}
             ],
-            "bju": {"protein_g": 34, "fat_g": 16, "carbs_g": 45, "kcal": 430}
+            "bju": {"protein_g": 30, "fat_g": 12, "carbs_g": 45, "kcal": 400}
           },
           {
-            "name": "Паста с курицей и сливочным соусом",
+            "name": "Паста с тунцом",
             "ingredients": [
               {"name": "Макароны", "amount": "300 г"},
-              {"name": "Куриное филе", "amount": "400 г"},
-              {"name": "Сливки", "amount": "200 мл"},
-              {"name": "Сыр твёрдый", "amount": "50 г"}
-            ],
-            "bju": {"protein_g": 32, "fat_g": 24, "carbs_g": 55, "kcal": 500}
-          },
-          {
-            "name": "Овощной суп-пюре с гренками",
-            "ingredients": [
-              {"name": "Тыква/кабачок", "amount": "600 г"},
-              {"name": "Картофель", "amount": "2 шт"},
-              {"name": "Сливки", "amount": "100 мл"},
-              {"name": "Хлеб (для гренок)", "amount": "4 ломтика"}
-            ],
-            "bju": {"protein_g": 10, "fat_g": 14, "carbs_g": 35, "kcal": 300}
-          }
-        ],
-        "snack": [
-          {
-            "name": "Ролл из лаваша с ветчиной и сыром + виноград",
-            "ingredients": [
-              {"name": "Лаваш", "amount": "1 шт"},
-              {"name": "Ветчина", "amount": "40 г"},
-              {"name": "Сыр твёрдый", "amount": "20 г"},
-              {"name": "Виноград", "amount": "горсть"}
-            ],
-            "bju": {"protein_g": 14, "fat_g": 12, "carbs_g": 35, "kcal": 300}
-          },
-          {
-            "name": "Бутерброд с арахисовой пастой + банан",
-            "ingredients": [
-              {"name": "Хлеб", "amount": "2 ломтика"},
-              {"name": "Арахисовая паста", "amount": "20 г"},
-              {"name": "Банан", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 10, "fat_g": 12, "carbs_g": 40, "kcal": 310}
-          },
-          {
-            "name": "Морковные палочки + сырок + крекеры",
-            "ingredients": [
-              {"name": "Морковь", "amount": "1 шт"},
-              {"name": "Творожный сырок", "amount": "1 шт"},
-              {"name": "Крекеры", "amount": "6 шт"}
-            ],
-            "bju": {"protein_g": 6, "fat_g": 8, "carbs_g": 25, "kcal": 200}
-          }
-        ]
-      }
-    },
-    {
-      "day": "Среда",
-      "meals": {
-        "breakfast": [
-          {
-            "name": "Сырники со сметаной",
-            "ingredients": [
-              {"name": "Творог", "amount": "400 г"},
-              {"name": "Яйцо", "amount": "1 шт"},
-              {"name": "Мука", "amount": "60 г"},
-              {"name": "Сметана", "amount": "100 г"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 16, "carbs_g": 35, "kcal": 380}
-          },
-          {
-            "name": "Рисовая каша на молоке с изюмом",
-            "ingredients": [
-              {"name": "Рис", "amount": "150 г"},
-              {"name": "Молоко", "amount": "600 мл"},
-              {"name": "Изюм", "amount": "50 г"}
-            ],
-            "bju": {"protein_g": 14, "fat_g": 10, "carbs_g": 60, "kcal": 380}
-          },
-          {
-            "name": "Тост с авокадо и яйцом-пашот",
-            "ingredients": [
-              {"name": "Хлеб", "amount": "4 ломтика"},
-              {"name": "Авокадо", "amount": "1 шт"},
-              {"name": "Яйца", "amount": "4 шт"}
-            ],
-            "bju": {"protein_g": 22, "fat_g": 22, "carbs_g": 30, "kcal": 390}
-          }
-        ],
-        "lunch": [
-          {
-            "name": "Суп с фрикадельками",
-            "ingredients": [
-              {"name": "Фарш", "amount": "400 г"},
-              {"name": "Картофель", "amount": "3 шт"},
-              {"name": "Морковь", "amount": "1 шт"},
-              {"name": "Вермишель", "amount": "80 г"}
-            ],
-            "bju": {"protein_g": 26, "fat_g": 14, "carbs_g": 35, "kcal": 360}
-          },
-          {
-            "name": "Гречка с куриной печенью в сметанном соусе",
-            "ingredients": [
-              {"name": "Гречка", "amount": "250 г"},
-              {"name": "Куриная печень", "amount": "400 г"},
-              {"name": "Сметана", "amount": "150 г"},
-              {"name": "Лук", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 32, "fat_g": 18, "carbs_g": 48, "kcal": 440}
-          },
-          {
-            "name": "Спагетти с тунцом и овощами",
-            "ingredients": [
-              {"name": "Спагетти", "amount": "300 г"},
               {"name": "Тунец консервированный", "amount": "2 банки"},
               {"name": "Помидоры", "amount": "2 шт"}
             ],
-            "bju": {"protein_g": 30, "fat_g": 12, "carbs_g": 55, "kcal": 420}
-          }
-        ],
-        "dinner": [
-          {
-            "name": "Овощная запеканка с курицей",
-            "ingredients": [
-              {"name": "Куриное филе", "amount": "400 г"},
-              {"name": "Картофель", "amount": "500 г"},
-              {"name": "Кабачок", "amount": "1 шт"},
-              {"name": "Сыр твёрдый", "amount": "80 г"}
-            ],
-            "bju": {"protein_g": 32, "fat_g": 16, "carbs_g": 35, "kcal": 400}
+            "bju": {"protein_g": 28, "fat_g": 10, "carbs_g": 55, "kcal": 400}
           },
           {
-            "name": "Пюре с рыбной котлетой",
+            "name": "Запечённые баклажаны с фаршем",
             "ingredients": [
-              {"name": "Картофель", "amount": "800 г"},
-              {"name": "Филе рыбы", "amount": "400 г"},
-              {"name": "Яйцо", "amount": "1 шт"}
+              {"name": "Баклажаны", "amount": "3 шт"},
+              {"name": "Фарш", "amount": "400 г"},
+              {"name": "Сыр твёрдый", "amount": "100 г"}
             ],
-            "bju": {"protein_g": 30, "fat_g": 14, "carbs_g": 45, "kcal": 400}
-          },
-          {
-            "name": "Плов с курицей",
-            "ingredients": [
-              {"name": "Рис", "amount": "300 г"},
-              {"name": "Куриное филе/бёдра", "amount": "400 г"},
-              {"name": "Морковь", "amount": "2 шт"},
-              {"name": "Лук", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 16, "carbs_g": 60, "kcal": 460}
-          }
-        ],
-        "snack": [
-          {
-            "name": "Бутерброд с сыром + груша + орехи",
-            "ingredients": [
-              {"name": "Хлеб", "amount": "2 ломтика"},
-              {"name": "Сыр твёрдый", "amount": "30 г"},
-              {"name": "Груша", "amount": "1 шт"},
-              {"name": "Орехи", "amount": "горсть"}
-            ],
-            "bju": {"protein_g": 12, "fat_g": 14, "carbs_g": 30, "kcal": 300}
-          },
-          {
-            "name": "Оладьи с яблоком",
-            "ingredients": [
-              {"name": "Оладьи (заготовка выходного дня)", "amount": "3 шт"},
-              {"name": "Яблоко", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 8, "fat_g": 10, "carbs_g": 35, "kcal": 280}
-          },
-          {
-            "name": "Хлебец с хумусом + огурец",
-            "ingredients": [
-              {"name": "Хлебцы", "amount": "3 шт"},
-              {"name": "Хумус", "amount": "40 г"},
-              {"name": "Огурец", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 8, "fat_g": 8, "carbs_g": 25, "kcal": 220}
-          }
-        ]
-      }
-    },
-    {
-      "day": "Четверг",
-      "meals": {
-        "breakfast": [
-          {
-            "name": "Омлет с ветчиной и зеленью",
-            "ingredients": [
-              {"name": "Яйца", "amount": "6 шт"},
-              {"name": "Ветчина", "amount": "100 г"},
-              {"name": "Зелень", "amount": "по вкусу"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 22, "carbs_g": 5, "kcal": 350}
-          },
-          {
-            "name": "Овсянка с яблоком и корицей",
-            "ingredients": [
-              {"name": "Овсяные хлопья", "amount": "200 г"},
-              {"name": "Молоко", "amount": "600 мл"},
-              {"name": "Яблоко", "amount": "2 шт"}
-            ],
-            "bju": {"protein_g": 14, "fat_g": 10, "carbs_g": 55, "kcal": 350}
-          },
-          {
-            "name": "Творожная запеканка",
-            "ingredients": [
-              {"name": "Творог", "amount": "400 г"},
-              {"name": "Яйцо", "amount": "2 шт"},
-              {"name": "Манка", "amount": "60 г"}
-            ],
-            "bju": {"protein_g": 28, "fat_g": 12, "carbs_g": 30, "kcal": 330}
-          }
-        ],
-        "lunch": [
-          {
-            "name": "Куриная лапша",
-            "ingredients": [
-              {"name": "Куриное филе", "amount": "400 г"},
-              {"name": "Лапша", "amount": "150 г"},
-              {"name": "Морковь", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 10, "carbs_g": 40, "kcal": 380}
-          },
-          {
-            "name": "Рис с овощами и курицей",
-            "ingredients": [
-              {"name": "Рис", "amount": "250 г"},
-              {"name": "Куриное филе", "amount": "400 г"},
-              {"name": "Овощи смесь (морковь/горошек/кукуруза)", "amount": "300 г"}
-            ],
-            "bju": {"protein_g": 32, "fat_g": 10, "carbs_g": 55, "kcal": 420}
-          },
-          {
-            "name": "Тушёная капуста с сосисками",
-            "ingredients": [
-              {"name": "Капуста", "amount": "500 г"},
-              {"name": "Сосиски", "amount": "4 шт"},
-              {"name": "Морковь", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 18, "fat_g": 22, "carbs_g": 30, "kcal": 370}
-          }
-        ],
-        "dinner": [
-          {
-            "name": "Куриные бёдра запечённые с овощами гриль",
-            "ingredients": [
-              {"name": "Куриные бёдра", "amount": "600 г"},
-              {"name": "Кабачок/перец/лук", "amount": "500 г"}
-            ],
-            "bju": {"protein_g": 36, "fat_g": 22, "carbs_g": 15, "kcal": 400}
-          },
-          {
-            "name": "Макароны с сыром и брокколи",
-            "ingredients": [
-              {"name": "Макароны", "amount": "300 г"},
-              {"name": "Сыр твёрдый", "amount": "150 г"},
-              {"name": "Брокколи", "amount": "300 г"}
-            ],
-            "bju": {"protein_g": 24, "fat_g": 20, "carbs_g": 60, "kcal": 460}
-          },
-          {
-            "name": "Рыбные котлеты с пюре",
-            "ingredients": [
-              {"name": "Филе рыбы", "amount": "400 г"},
-              {"name": "Картофель", "amount": "800 г"},
-              {"name": "Яйцо", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 30, "fat_g": 12, "carbs_g": 45, "kcal": 390}
+            "bju": {"protein_g": 26, "fat_g": 20, "carbs_g": 20, "kcal": 360}
           }
         ],
         "snack": [
@@ -486,135 +155,215 @@
             "bju": {"protein_g": 14, "fat_g": 6, "carbs_g": 30, "kcal": 250}
           },
           {
-            "name": "Творожный сырок + мандарин + крекеры",
+            "name": "Сырок + виноград + крекеры",
             "ingredients": [
               {"name": "Творожный сырок", "amount": "1 шт"},
-              {"name": "Мандарин", "amount": "1 шт"},
+              {"name": "Виноград", "amount": "горсть"},
               {"name": "Крекеры", "amount": "6 шт"}
             ],
             "bju": {"protein_g": 8, "fat_g": 10, "carbs_g": 30, "kcal": 250}
           },
           {
-            "name": "Ролл с сыром и огурцом + виноград",
+            "name": "Хлебцы с хумусом + огурец",
             "ingredients": [
-              {"name": "Лаваш", "amount": "1 шт"},
-              {"name": "Сыр твёрдый", "amount": "30 г"},
-              {"name": "Огурец", "amount": "1 шт"},
-              {"name": "Виноград", "amount": "горсть"}
+              {"name": "Хлебцы", "amount": "3 шт"},
+              {"name": "Хумус", "amount": "40 г"},
+              {"name": "Огурец", "amount": "1 шт"}
             ],
-            "bju": {"protein_g": 10, "fat_g": 10, "carbs_g": 30, "kcal": 260}
+            "bju": {"protein_g": 8, "fat_g": 8, "carbs_g": 25, "kcal": 220}
           }
         ]
       }
     },
     {
-      "day": "Пятница",
+      "day": "Вторник",
+      "lunchGroupRef": "soup_mon_tue",
       "meals": {
         "breakfast": [
           {
-            "name": "Французские гренки с ягодами",
+            "name": "Овсянка с ягодами",
             "ingredients": [
-              {"name": "Хлеб", "amount": "6 ломтиков"},
-              {"name": "Яйца", "amount": "3 шт"},
-              {"name": "Молоко", "amount": "150 мл"},
+              {"name": "Овсяные хлопья", "amount": "200 г"},
+              {"name": "Молоко", "amount": "500 мл"},
               {"name": "Ягоды замороженные", "amount": "150 г"}
             ],
-            "bju": {"protein_g": 18, "fat_g": 14, "carbs_g": 50, "kcal": 400}
+            "bju": {"protein_g": 14, "fat_g": 8, "carbs_g": 50, "kcal": 330}
           },
           {
-            "name": "Йогурт с мюсли и фруктами",
+            "name": "Сырники",
             "ingredients": [
-              {"name": "Йогурт", "amount": "400 г"},
-              {"name": "Мюсли", "amount": "150 г"},
-              {"name": "Фрукты сезонные", "amount": "2 шт"}
+              {"name": "Творог", "amount": "350 г"},
+              {"name": "Яйцо", "amount": "1 шт"},
+              {"name": "Мука", "amount": "60 г"}
             ],
-            "bju": {"protein_g": 16, "fat_g": 8, "carbs_g": 45, "kcal": 320}
+            "bju": {"protein_g": 26, "fat_g": 12, "carbs_g": 32, "kcal": 340}
           },
           {
-            "name": "Бутерброд с сыром и помидором",
+            "name": "Тост с ветчиной и яйцом",
             "ingredients": [
               {"name": "Хлеб", "amount": "4 ломтика"},
-              {"name": "Сыр твёрдый", "amount": "80 г"},
-              {"name": "Помидор", "amount": "1 шт"}
+              {"name": "Ветчина", "amount": "100 г"},
+              {"name": "Яйца", "amount": "4 шт"}
             ],
-            "bju": {"protein_g": 20, "fat_g": 16, "carbs_g": 30, "kcal": 340}
-          }
-        ],
-        "lunch": [
-          {
-            "name": "Овощной суп с мясом (солянка)",
-            "ingredients": [
-              {"name": "Мясо (говядина/свинина)", "amount": "400 г"},
-              {"name": "Картофель", "amount": "3 шт"},
-              {"name": "Овощи смесь", "amount": "300 г"}
-            ],
-            "bju": {"protein_g": 28, "fat_g": 16, "carbs_g": 30, "kcal": 380}
-          },
-          {
-            "name": "Гречка с грибами и курицей",
-            "ingredients": [
-              {"name": "Гречка", "amount": "250 г"},
-              {"name": "Куриное филе", "amount": "400 г"},
-              {"name": "Грибы", "amount": "250 г"}
-            ],
-            "bju": {"protein_g": 32, "fat_g": 12, "carbs_g": 48, "kcal": 420}
-          },
-          {
-            "name": "Ленивые голубцы",
-            "ingredients": [
-              {"name": "Фарш", "amount": "400 г"},
-              {"name": "Капуста", "amount": "300 г"},
-              {"name": "Рис", "amount": "150 г"}
-            ],
-            "bju": {"protein_g": 26, "fat_g": 16, "carbs_g": 35, "kcal": 380}
+            "bju": {"protein_g": 28, "fat_g": 18, "carbs_g": 28, "kcal": 390}
           }
         ],
         "dinner": [
           {
-            "name": "Домашняя пицца с овощами и сыром",
+            "name": "Свиные отбивные с пюре",
             "ingredients": [
-              {"name": "Тесто (мука/дрожжи)", "amount": "400 г"},
-              {"name": "Сыр твёрдый", "amount": "200 г"},
-              {"name": "Овощи (перец/помидор/шампиньоны)", "amount": "300 г"}
+              {"name": "Свинина (отбивные)", "amount": "500 г"},
+              {"name": "Картофель", "amount": "700 г"},
+              {"name": "Молоко", "amount": "100 мл"}
             ],
-            "bju": {"protein_g": 26, "fat_g": 22, "carbs_g": 60, "kcal": 480}
+            "bju": {"protein_g": 32, "fat_g": 20, "carbs_g": 40, "kcal": 440}
           },
           {
-            "name": "Куриный шницель с картофелем",
+            "name": "Рыбные котлеты с рисом",
+            "ingredients": [
+              {"name": "Филе рыбы", "amount": "450 г"},
+              {"name": "Рис", "amount": "250 г"},
+              {"name": "Яйцо", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 28, "fat_g": 10, "carbs_g": 50, "kcal": 380}
+          },
+          {
+            "name": "Курица терияки с овощами",
             "ingredients": [
               {"name": "Куриное филе", "amount": "500 г"},
-              {"name": "Панировочные сухари", "amount": "100 г"},
-              {"name": "Картофель", "amount": "800 г"}
+              {"name": "Соус терияки", "amount": "100 мл"},
+              {"name": "Овощи (перец/брокколи/морковь)", "amount": "400 г"}
             ],
-            "bju": {"protein_g": 34, "fat_g": 20, "carbs_g": 45, "kcal": 460}
-          },
-          {
-            "name": "Рыба на пару с рисом",
-            "ingredients": [
-              {"name": "Филе рыбы", "amount": "500 г"},
-              {"name": "Рис", "amount": "250 г"}
-            ],
-            "bju": {"protein_g": 34, "fat_g": 6, "carbs_g": 45, "kcal": 360}
+            "bju": {"protein_g": 32, "fat_g": 10, "carbs_g": 25, "kcal": 340}
           }
         ],
         "snack": [
           {
-            "name": "Бутерброд с сыром + груша",
+            "name": "Ролл с сыром и огурцом",
+            "ingredients": [
+              {"name": "Лаваш", "amount": "1 шт"},
+              {"name": "Сыр твёрдый", "amount": "30 г"},
+              {"name": "Огурец", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 10, "fat_g": 10, "carbs_g": 28, "kcal": 250}
+          },
+          {
+            "name": "Банан + орехи",
+            "ingredients": [
+              {"name": "Банан", "amount": "1 шт"},
+              {"name": "Орехи", "amount": "горсть"}
+            ],
+            "bju": {"protein_g": 6, "fat_g": 12, "carbs_g": 30, "kcal": 250}
+          },
+          {
+            "name": "Бутерброд с творожным сыром + груша",
+            "ingredients": [
+              {"name": "Хлеб", "amount": "2 ломтика"},
+              {"name": "Творожный сыр", "amount": "40 г"},
+              {"name": "Груша", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 8, "fat_g": 8, "carbs_g": 30, "kcal": 240}
+          }
+        ]
+      }
+    },
+    {
+      "day": "Среда",
+      "meals": {
+        "breakfast": [
+          {
+            "name": "Омлет с сыром",
+            "ingredients": [
+              {"name": "Яйца", "amount": "6 шт"},
+              {"name": "Сыр твёрдый", "amount": "100 г"},
+              {"name": "Молоко", "amount": "100 мл"}
+            ],
+            "bju": {"protein_g": 30, "fat_g": 24, "carbs_g": 8, "kcal": 360}
+          },
+          {
+            "name": "Рисовая каша с курагой",
+            "ingredients": [
+              {"name": "Рис", "amount": "150 г"},
+              {"name": "Молоко", "amount": "500 мл"},
+              {"name": "Курага", "amount": "60 г"}
+            ],
+            "bju": {"protein_g": 12, "fat_g": 8, "carbs_g": 55, "kcal": 340}
+          },
+          {
+            "name": "Йогурт с мюсли",
+            "ingredients": [
+              {"name": "Йогурт", "amount": "400 г"},
+              {"name": "Мюсли", "amount": "150 г"}
+            ],
+            "bju": {"protein_g": 16, "fat_g": 8, "carbs_g": 45, "kcal": 320}
+          }
+        ],
+        "lunch": [
+          {
+            "name": "Плов с говядиной",
+            "ingredients": [
+              {"name": "Говядина", "amount": "500 г"},
+              {"name": "Рис", "amount": "300 г"},
+              {"name": "Морковь", "amount": "2 шт"},
+              {"name": "Лук", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 28, "fat_g": 14, "carbs_g": 55, "kcal": 430}
+          },
+          {
+            "name": "Макароны с курицей и брокколи",
+            "ingredients": [
+              {"name": "Макароны", "amount": "300 г"},
+              {"name": "Куриное филе", "amount": "450 г"},
+              {"name": "Брокколи", "amount": "300 г"}
+            ],
+            "bju": {"protein_g": 32, "fat_g": 10, "carbs_g": 55, "kcal": 420}
+          },
+          {
+            "name": "Картофель с тушёной капустой и сосисками",
+            "ingredients": [
+              {"name": "Картофель", "amount": "600 г"},
+              {"name": "Капуста", "amount": "400 г"},
+              {"name": "Сосиски", "amount": "5 шт"}
+            ],
+            "bju": {"protein_g": 18, "fat_g": 20, "carbs_g": 40, "kcal": 380}
+          }
+        ],
+        "dinner": [
+          {
+            "name": "Тефтели в томатном соусе с рисом",
+            "ingredients": [
+              {"name": "Фарш", "amount": "450 г"},
+              {"name": "Рис", "amount": "150 г"},
+              {"name": "Томатный соус", "amount": "300 г"}
+            ],
+            "bju": {"protein_g": 26, "fat_g": 16, "carbs_g": 40, "kcal": 390}
+          },
+          {
+            "name": "Запечённая рыба с овощами",
+            "ingredients": [
+              {"name": "Филе рыбы", "amount": "500 г"},
+              {"name": "Овощи (кабачок/помидор/перец)", "amount": "400 г"}
+            ],
+            "bju": {"protein_g": 32, "fat_g": 10, "carbs_g": 15, "kcal": 300}
+          },
+          {
+            "name": "Куриные бёдра с картофелем",
+            "ingredients": [
+              {"name": "Куриные бёдра", "amount": "550 г"},
+              {"name": "Картофель", "amount": "600 г"}
+            ],
+            "bju": {"protein_g": 32, "fat_g": 20, "carbs_g": 35, "kcal": 420}
+          }
+        ],
+        "snack": [
+          {
+            "name": "Бутерброд с сыром + мандарин",
             "ingredients": [
               {"name": "Хлеб", "amount": "2 ломтика"},
               {"name": "Сыр твёрдый", "amount": "30 г"},
-              {"name": "Груша", "amount": "1 шт"}
+              {"name": "Мандарин", "amount": "1 шт"}
             ],
             "bju": {"protein_g": 12, "fat_g": 10, "carbs_g": 28, "kcal": 260}
-          },
-          {
-            "name": "Банан + орехи + сырок",
-            "ingredients": [
-              {"name": "Банан", "amount": "1 шт"},
-              {"name": "Орехи", "amount": "горсть"},
-              {"name": "Творожный сырок", "amount": "1 шт"}
-            ],
-            "bju": {"protein_g": 8, "fat_g": 12, "carbs_g": 35, "kcal": 290}
           },
           {
             "name": "Хлебцы с творожным сыром + яблоко",
@@ -624,9 +373,184 @@
               {"name": "Яблоко", "amount": "1 шт"}
             ],
             "bju": {"protein_g": 8, "fat_g": 8, "carbs_g": 30, "kcal": 240}
+          },
+          {
+            "name": "Морковные палочки + сырок",
+            "ingredients": [
+              {"name": "Морковь", "amount": "1 шт"},
+              {"name": "Творожный сырок", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 6, "fat_g": 8, "carbs_g": 18, "kcal": 170}
+          }
+        ]
+      }
+    },
+    {
+      "day": "Четверг",
+      "lunchGroupRef": "soup_thu_fri",
+      "meals": {
+        "breakfast": [
+          {
+            "name": "Блины с творогом",
+            "ingredients": [
+              {"name": "Блины (заготовка)", "amount": "8 шт"},
+              {"name": "Творог", "amount": "200 г"}
+            ],
+            "bju": {"protein_g": 18, "fat_g": 14, "carbs_g": 55, "kcal": 400}
+          },
+          {
+            "name": "Овсянка с яблоком",
+            "ingredients": [
+              {"name": "Овсяные хлопья", "amount": "200 г"},
+              {"name": "Молоко", "amount": "500 мл"},
+              {"name": "Яблоко", "amount": "2 шт"}
+            ],
+            "bju": {"protein_g": 14, "fat_g": 8, "carbs_g": 50, "kcal": 330}
+          },
+          {
+            "name": "Бутерброд с авокадо и яйцом",
+            "ingredients": [
+              {"name": "Хлеб", "amount": "4 ломтика"},
+              {"name": "Авокадо", "amount": "1 шт"},
+              {"name": "Яйца", "amount": "4 шт"}
+            ],
+            "bju": {"protein_g": 20, "fat_g": 22, "carbs_g": 28, "kcal": 380}
+          }
+        ],
+        "dinner": [
+          {
+            "name": "Куриный шницель с пюре",
+            "ingredients": [
+              {"name": "Куриное филе", "amount": "500 г"},
+              {"name": "Панировочные сухари", "amount": "100 г"},
+              {"name": "Картофель", "amount": "700 г"}
+            ],
+            "bju": {"protein_g": 32, "fat_g": 18, "carbs_g": 45, "kcal": 430}
+          },
+          {
+            "name": "Спагетти карбонара",
+            "ingredients": [
+              {"name": "Спагетти", "amount": "300 г"},
+              {"name": "Бекон", "amount": "150 г"},
+              {"name": "Яйца", "amount": "3 шт"},
+              {"name": "Сыр твёрдый", "amount": "80 г"}
+            ],
+            "bju": {"protein_g": 26, "fat_g": 24, "carbs_g": 55, "kcal": 470}
+          },
+          {
+            "name": "Рыба на пару с гречкой",
+            "ingredients": [
+              {"name": "Филе рыбы", "amount": "500 г"},
+              {"name": "Гречка", "amount": "250 г"}
+            ],
+            "bju": {"protein_g": 32, "fat_g": 6, "carbs_g": 45, "kcal": 350}
+          }
+        ],
+        "snack": [
+          {
+            "name": "Бутерброд с индейкой + груша",
+            "ingredients": [
+              {"name": "Хлеб", "amount": "2 ломтика"},
+              {"name": "Индейка (нарезка)", "amount": "40 г"},
+              {"name": "Груша", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 14, "fat_g": 6, "carbs_g": 30, "kcal": 250}
+          },
+          {
+            "name": "Йогурт питьевой + печенье",
+            "ingredients": [
+              {"name": "Йогурт питьевой", "amount": "1 бутылка"},
+              {"name": "Печенье", "amount": "3 шт"}
+            ],
+            "bju": {"protein_g": 6, "fat_g": 8, "carbs_g": 30, "kcal": 230}
+          },
+          {
+            "name": "Ролл с ветчиной и сыром",
+            "ingredients": [
+              {"name": "Лаваш", "amount": "1 шт"},
+              {"name": "Ветчина", "amount": "40 г"},
+              {"name": "Сыр твёрдый", "amount": "20 г"}
+            ],
+            "bju": {"protein_g": 12, "fat_g": 10, "carbs_g": 28, "kcal": 250}
+          }
+        ]
+      }
+    },
+    {
+      "day": "Пятница",
+      "lunchGroupRef": "soup_thu_fri",
+      "meals": {
+        "breakfast": [
+          {
+            "name": "Яичница",
+            "ingredients": [
+              {"name": "Яйца", "amount": "5 шт"},
+              {"name": "Хлеб", "amount": "4 ломтика"}
+            ],
+            "bju": {"protein_g": 22, "fat_g": 18, "carbs_g": 25, "kcal": 340}
+          },
+          {
+            "name": "Творог с мёдом",
+            "ingredients": [
+              {"name": "Творог", "amount": "350 г"},
+              {"name": "Мёд", "amount": "2 ст.л."}
+            ],
+            "bju": {"protein_g": 28, "fat_g": 10, "carbs_g": 25, "kcal": 300}
+          },
+          {
+            "name": "Овсянка",
+            "ingredients": [
+              {"name": "Овсяные хлопья", "amount": "200 г"},
+              {"name": "Молоко", "amount": "500 мл"}
+            ],
+            "bju": {"protein_g": 14, "fat_g": 8, "carbs_g": 45, "kcal": 310}
+          }
+        ],
+        "dinner": {
+          "type": "order_in",
+          "note": "Заказываем еду — пицца/суши/бургеры, готовка не нужна"
+        },
+        "snack": [
+          {
+            "name": "Бутерброд с сыром + яблоко",
+            "ingredients": [
+              {"name": "Хлеб", "amount": "2 ломтика"},
+              {"name": "Сыр твёрдый", "amount": "30 г"},
+              {"name": "Яблоко", "amount": "1 шт"}
+            ],
+            "bju": {"protein_g": 12, "fat_g": 10, "carbs_g": 28, "kcal": 260}
+          },
+          {
+            "name": "Хлебцы с хумусом",
+            "ingredients": [
+              {"name": "Хлебцы", "amount": "3 шт"},
+              {"name": "Хумус", "amount": "40 г"}
+            ],
+            "bju": {"protein_g": 6, "fat_g": 8, "carbs_g": 22, "kcal": 190}
+          },
+          {
+            "name": "Банан + орехи",
+            "ingredients": [
+              {"name": "Банан", "amount": "1 шт"},
+              {"name": "Орехи", "amount": "горсть"}
+            ],
+            "bju": {"protein_g": 6, "fat_g": 12, "carbs_g": 30, "kcal": 250}
           }
         ]
       }
     }
-  ]
+  ],
+  "weekend": {
+    "Суббота": {
+      "breakfast": "Сырники или яичница",
+      "lunch": "Лёгкий/из остатков",
+      "dinner": "Стейк/запечённое мясо с овощами",
+      "prep": "Тесто для блинов на воскресенье — замесить с вечера"
+    },
+    "Воскресенье": {
+      "breakfast": "Блины или драники (на этой неделе — драники со сметаной)",
+      "lunch": "Курица целиком в духовке + овощи",
+      "dinner": "Омлет или овощной суп"
+    }
+  }
 }

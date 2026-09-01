@@ -46,6 +46,89 @@ body {
   margin-top: 4px;
 }
 
+.menu-info {
+  max-width: 480px;
+  margin: 10px auto 0;
+  text-align: left;
+}
+
+.menu-info-list {
+  margin: 0;
+  padding: 10px 14px;
+  list-style: none;
+  background: var(--accent-soft);
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: #7a4a24;
+}
+
+.menu-info-list li {
+  padding: 2px 0;
+}
+
+.menu-info-list li::before {
+  content: "• ";
+}
+
+.day-tab.weekend {
+  background: #eef2ea;
+  border-color: #d7e0d0;
+}
+
+.day-tab.weekend.active {
+  background: var(--selected);
+  border-color: var(--selected);
+  color: #fff;
+}
+
+.group-badge {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--selected);
+  background: var(--selected-soft);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.info-card {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.info-card-title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.info-card-note {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.weekend-row {
+  display: flex;
+  gap: 10px;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.weekend-row-label {
+  flex: 0 0 110px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.weekend-row-value {
+  flex: 1;
+  font-size: 15.5px;
+}
+
 /* Day tabs */
 .day-tabs {
   display: flex;

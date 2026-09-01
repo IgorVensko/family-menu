@@ -5,46 +5,83 @@ const MEAL_TYPES = [
   { key: "snack", label: "Перекус", icon: "🍎" }
 ];
 
-const STORAGE_SELECTIONS = "familyMenu:selections";
-const STORAGE_CHECKED = "familyMenu:shoppingChecked";
+const WEEKEND_MEAL_LABELS = [
+  { key: "breakfast", label: "Завтрак", icon: "🌅" },
+  { key: "lunch", label: "Обед", icon: "🍲" },
+  { key: "dinner", label: "Ужин", icon: "🌙" }
+];
 
 let menuData = null;
-let selections = loadSelections();
-let checkedItems = loadChecked();
-let activeDayIndex = 0;
+let allTabs = [];
+let selections = { byDay: {}, byGroup: {} };
+let checkedItems = {};
+let activeTabIndex = 0;
+let storageKeySelections = "familyMenu:selections:default";
+let storageKeyChecked = "familyMenu:shoppingChecked:default";
 
-function loadSelections() {
+function weekStorageKey(prefix) {
+  const week = (menuData && menuData.week) || "default";
+  return `${prefix}:${week}`;
+}
+
+function loadJSON(key, fallback) {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_SELECTIONS)) || {};
+    const raw = JSON.parse(localStorage.getItem(key));
+    return raw || fallback;
   } catch (e) {
-    return {};
+    return fallback;
   }
 }
 
 function saveSelections() {
-  localStorage.setItem(STORAGE_SELECTIONS, JSON.stringify(selections));
-}
-
-function loadChecked() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_CHECKED)) || {};
-  } catch (e) {
-    return {};
-  }
+  localStorage.setItem(storageKeySelections, JSON.stringify(selections));
 }
 
 function saveChecked() {
-  localStorage.setItem(STORAGE_CHECKED, JSON.stringify(checkedItems));
+  localStorage.setItem(storageKeyChecked, JSON.stringify(checkedItems));
+}
+
+function getBju(variant) {
+  return variant.bju || variant.bju_per_portion || null;
+}
+
+function findGroup(groupId) {
+  return (menuData.lunchGroups || []).find((g) => g.id === groupId);
+}
+
+function resolveMealSlot(day, mealKey) {
+  if (mealKey === "lunch" && day.lunchGroupRef) {
+    const group = findGroup(day.lunchGroupRef);
+    if (group) return { kind: "group", group };
+  }
+  const raw = day.meals ? day.meals[mealKey] : undefined;
+  if (!raw) return null;
+  if (Array.isArray(raw)) return { kind: "variants", variants: raw };
+  if (typeof raw === "object") return { kind: "info", info: raw };
+  return null;
 }
 
 async function init() {
   const res = await fetch("menu.json");
   menuData = await res.json();
 
-  document.getElementById("weekLabel").textContent = menuData.week || "";
+  storageKeySelections = weekStorageKey("familyMenu:selections");
+  storageKeyChecked = weekStorageKey("familyMenu:shoppingChecked");
+  selections = loadJSON(storageKeySelections, { byDay: {}, byGroup: {} });
+  checkedItems = loadJSON(storageKeyChecked, {});
 
-  renderDayTabs();
-  renderDay(activeDayIndex);
+  document.getElementById("weekLabel").textContent = menuData.week || "";
+  renderMenuInfo();
+
+  allTabs = menuData.days.map((day) => ({ kind: "day", day }));
+  if (menuData.weekend) {
+    Object.keys(menuData.weekend).forEach((name) => {
+      allTabs.push({ kind: "weekend", name, data: menuData.weekend[name] });
+    });
+  }
+
+  renderTabs();
+  renderActiveTab();
 
   document.getElementById("shoppingListBtn").addEventListener("click", openShoppingList);
   document.getElementById("closeShoppingBtn").addEventListener("click", closeShoppingList);
@@ -54,30 +91,55 @@ async function init() {
   document.getElementById("resetBtn").addEventListener("click", resetWeek);
 }
 
-function renderDayTabs() {
+function renderMenuInfo() {
+  const el = document.getElementById("menuInfo");
+  el.innerHTML = "";
+  const parts = [];
+  if (menuData.servingsBase) parts.push(menuData.servingsBase);
+  if (Array.isArray(menuData.notes)) parts.push(...menuData.notes);
+  if (parts.length === 0) return;
+
+  const list = document.createElement("ul");
+  list.className = "menu-info-list";
+  parts.forEach((text) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    list.appendChild(li);
+  });
+  el.appendChild(list);
+}
+
+function renderTabs() {
   const nav = document.getElementById("dayTabs");
   nav.innerHTML = "";
-  menuData.days.forEach((day, index) => {
+  allTabs.forEach((tab, index) => {
     const btn = document.createElement("button");
-    btn.className = "day-tab" + (index === activeDayIndex ? " active" : "");
-    btn.textContent = day.day;
+    btn.className = "day-tab" + (index === activeTabIndex ? " active" : "") + (tab.kind === "weekend" ? " weekend" : "");
+    btn.textContent = tab.kind === "day" ? tab.day.day : tab.name;
     btn.addEventListener("click", () => {
-      activeDayIndex = index;
-      renderDayTabs();
-      renderDay(activeDayIndex);
+      activeTabIndex = index;
+      renderTabs();
+      renderActiveTab();
     });
     nav.appendChild(btn);
   });
 }
 
-function renderDay(index) {
-  const day = menuData.days[index];
+function renderActiveTab() {
+  const tab = allTabs[activeTabIndex];
   const container = document.getElementById("dayContent");
   container.innerHTML = "";
+  if (tab.kind === "day") {
+    renderDay(container, tab.day);
+  } else {
+    renderWeekendDay(container, tab.name, tab.data);
+  }
+}
 
+function renderDay(container, day) {
   MEAL_TYPES.forEach((mealType) => {
-    const variants = day.meals[mealType.key];
-    if (!variants) return;
+    const slot = resolveMealSlot(day, mealType.key);
+    if (!slot) return;
 
     const section = document.createElement("section");
     section.className = "meal-section";
@@ -87,63 +149,140 @@ function renderDay(index) {
     title.textContent = `${mealType.icon} ${mealType.label}`;
     section.appendChild(title);
 
-    const cardsWrap = document.createElement("div");
-    cardsWrap.className = "meal-cards";
-
-    variants.forEach((variant, variantIndex) => {
-      const selectedIndex = selections[day.day] && selections[day.day][mealType.key];
-      const isSelected = selectedIndex === variantIndex;
-
-      const card = document.createElement("div");
-      card.className = "meal-card" + (isSelected ? " selected" : "");
-
-      const top = document.createElement("div");
-      top.className = "meal-card-top";
-
-      const radio = document.createElement("div");
-      radio.className = "meal-card-radio";
-
-      const name = document.createElement("div");
-      name.className = "meal-card-name";
-      name.textContent = variant.name;
-
-      top.appendChild(radio);
-      top.appendChild(name);
-      card.appendChild(top);
-
-      const bju = document.createElement("div");
-      bju.className = "meal-card-bju";
-      bju.textContent = `Б${variant.bju.protein_g} / Ж${variant.bju.fat_g} / У${variant.bju.carbs_g} · ${variant.bju.kcal} ккал`;
-      card.appendChild(bju);
-
-      const ingredients = document.createElement("div");
-      ingredients.className = "meal-card-ingredients";
-      ingredients.textContent = variant.ingredients.map(i => `${i.name} (${i.amount})`).join(", ");
-      card.appendChild(ingredients);
-
-      card.addEventListener("click", () => {
-        if (!selections[day.day]) selections[day.day] = {};
-        selections[day.day][mealType.key] = variantIndex;
+    if (slot.kind === "group") {
+      const badge = document.createElement("div");
+      badge.className = "group-badge";
+      badge.textContent = `Общий выбор: ${slot.group.days.join(" + ")} — готовится один раз`;
+      section.appendChild(badge);
+      section.appendChild(renderVariantCards(slot.group.options, (idx) => selections.byGroup[slot.group.id] === idx, (idx) => {
+        selections.byGroup[slot.group.id] = idx;
         saveSelections();
-        renderDay(activeDayIndex);
-      });
+        renderActiveTab();
+      }));
+    } else if (slot.kind === "variants") {
+      section.appendChild(renderVariantCards(slot.variants, (idx) => {
+        const daySel = selections.byDay[day.day];
+        return !!daySel && daySel[mealType.key] === idx;
+      }, (idx) => {
+        if (!selections.byDay[day.day]) selections.byDay[day.day] = {};
+        selections.byDay[day.day][mealType.key] = idx;
+        saveSelections();
+        renderActiveTab();
+      }));
+    } else if (slot.kind === "info") {
+      section.appendChild(renderInfoCard(slot.info));
+    }
 
-      cardsWrap.appendChild(card);
-    });
-
-    section.appendChild(cardsWrap);
     container.appendChild(section);
   });
+}
+
+function renderVariantCards(variants, isSelectedFn, onSelect) {
+  const cardsWrap = document.createElement("div");
+  cardsWrap.className = "meal-cards";
+
+  variants.forEach((variant, variantIndex) => {
+    const isSelected = isSelectedFn(variantIndex);
+
+    const card = document.createElement("div");
+    card.className = "meal-card" + (isSelected ? " selected" : "");
+
+    const top = document.createElement("div");
+    top.className = "meal-card-top";
+
+    const radio = document.createElement("div");
+    radio.className = "meal-card-radio";
+
+    const name = document.createElement("div");
+    name.className = "meal-card-name";
+    name.textContent = variant.name;
+
+    top.appendChild(radio);
+    top.appendChild(name);
+    card.appendChild(top);
+
+    const bju = getBju(variant);
+    if (bju) {
+      const bjuEl = document.createElement("div");
+      bjuEl.className = "meal-card-bju";
+      bjuEl.textContent = `Б${bju.protein_g} / Ж${bju.fat_g} / У${bju.carbs_g} · ${bju.kcal} ккал`;
+      card.appendChild(bjuEl);
+    }
+
+    const ingredients = document.createElement("div");
+    ingredients.className = "meal-card-ingredients";
+    ingredients.textContent = variant.ingredients.map((i) => `${i.name} (${i.amount})`).join(", ");
+    card.appendChild(ingredients);
+
+    card.addEventListener("click", () => onSelect(variantIndex));
+
+    cardsWrap.appendChild(card);
+  });
+
+  return cardsWrap;
+}
+
+function renderInfoCard(info) {
+  const card = document.createElement("div");
+  card.className = "info-card";
+  const title = document.createElement("div");
+  title.className = "info-card-title";
+  title.textContent = info.type === "order_in" ? "🛵 Заказываем еду" : "ℹ️ Без готовки";
+  card.appendChild(title);
+  if (info.note) {
+    const note = document.createElement("div");
+    note.className = "info-card-note";
+    note.textContent = info.note;
+    card.appendChild(note);
+  }
+  return card;
+}
+
+function renderWeekendDay(container, name, data) {
+  const section = document.createElement("section");
+  section.className = "meal-section";
+
+  WEEKEND_MEAL_LABELS.forEach((mealType) => {
+    const text = data[mealType.key];
+    if (!text) return;
+    const row = document.createElement("div");
+    row.className = "weekend-row";
+    const label = document.createElement("div");
+    label.className = "weekend-row-label";
+    label.textContent = `${mealType.icon} ${mealType.label}`;
+    const value = document.createElement("div");
+    value.className = "weekend-row-value";
+    value.textContent = text;
+    row.appendChild(label);
+    row.appendChild(value);
+    section.appendChild(row);
+  });
+
+  container.appendChild(section);
+
+  if (data.prep) {
+    const tip = document.createElement("div");
+    tip.className = "info-card";
+    const title = document.createElement("div");
+    title.className = "info-card-title";
+    title.textContent = "📝 Заготовка заранее";
+    tip.appendChild(title);
+    const note = document.createElement("div");
+    note.className = "info-card-note";
+    note.textContent = data.prep;
+    tip.appendChild(note);
+    container.appendChild(tip);
+  }
 }
 
 function resetWeek() {
   const ok = confirm("Очистить весь выбор блюд на неделю и список покупок?");
   if (!ok) return;
-  selections = {};
+  selections = { byDay: {}, byGroup: {} };
   checkedItems = {};
   saveSelections();
   saveChecked();
-  renderDay(activeDayIndex);
+  renderActiveTab();
 }
 
 // --- Shopping list ---
@@ -157,6 +296,7 @@ function normalizeUnit(unitRaw) {
   if (/^зубч/.test(u)) return "зубчик";
   if (/^доль/.test(u)) return "долька";
   if (/^стак/.test(u)) return "стакан";
+  if (/^бутыл/.test(u)) return "бутылка";
   if (/^ст\.?\s*л/.test(u)) return "ст.л.";
   if (/^ч\.?\s*л/.test(u)) return "ч.л.";
   return u;
@@ -174,36 +314,47 @@ function formatNumber(n) {
   return Number.isInteger(n) ? String(n) : n.toFixed(1).replace(/\.0$/, "");
 }
 
+function addIngredientsToGroups(groups, ingredients) {
+  ingredients.forEach((ing) => {
+    const parsed = parseAmount(ing.amount);
+    if (parsed.numeric) {
+      const key = `${ing.name}__${parsed.unit}`;
+      if (!groups[key]) {
+        groups[key] = { name: ing.name, numeric: true, value: 0, unit: parsed.unit };
+      }
+      groups[key].value += parsed.value;
+    } else {
+      const key = `${ing.name}__text__${parsed.text}`;
+      if (!groups[key]) {
+        groups[key] = { name: ing.name, numeric: false, text: parsed.text, count: 0 };
+      }
+      groups[key].count += 1;
+    }
+  });
+}
+
 function buildShoppingList() {
   const groups = {};
 
   menuData.days.forEach((day) => {
-    const daySel = selections[day.day];
-    if (!daySel) return;
-
     MEAL_TYPES.forEach((mealType) => {
-      const variantIndex = daySel[mealType.key];
-      if (variantIndex === undefined || variantIndex === null) return;
-      const variant = day.meals[mealType.key] && day.meals[mealType.key][variantIndex];
+      const slot = resolveMealSlot(day, mealType.key);
+      if (!slot || slot.kind !== "variants") return;
+      const daySel = selections.byDay[day.day];
+      const idx = daySel ? daySel[mealType.key] : undefined;
+      if (idx === undefined || idx === null) return;
+      const variant = slot.variants[idx];
       if (!variant) return;
-
-      variant.ingredients.forEach((ing) => {
-        const parsed = parseAmount(ing.amount);
-        if (parsed.numeric) {
-          const key = `${ing.name}__${parsed.unit}`;
-          if (!groups[key]) {
-            groups[key] = { name: ing.name, numeric: true, value: 0, unit: parsed.unit };
-          }
-          groups[key].value += parsed.value;
-        } else {
-          const key = `${ing.name}__text__${parsed.text}`;
-          if (!groups[key]) {
-            groups[key] = { name: ing.name, numeric: false, text: parsed.text, count: 0 };
-          }
-          groups[key].count += 1;
-        }
-      });
+      addIngredientsToGroups(groups, variant.ingredients);
     });
+  });
+
+  (menuData.lunchGroups || []).forEach((group) => {
+    const idx = selections.byGroup[group.id];
+    if (idx === undefined || idx === null) return;
+    const variant = group.options[idx];
+    if (!variant) return;
+    addIngredientsToGroups(groups, variant.ingredients);
   });
 
   return Object.keys(groups)
